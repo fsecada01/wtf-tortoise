@@ -34,18 +34,18 @@ include just a set of properties. For example:
 .. code-block:: python
 
    # Generate a form based on the model, excluding 'id' and 'created'.
-   BookForm = model_form(Book, exclude=('id', 'created'))
+   BookForm = model_form(Book, exclude=['id', 'created'])
 
    # or...
 
    # Generate a form based on the model, only including 'title' and 'content'.
-   BookForm = model_form(Book, only=('title', 'content'))
+   BookForm = model_form(Book, only=['title', 'content'])
 
 The form can be generated setting field arguments:
 
 .. code-block:: python
 
-   BookForm = model_form(Book, only=('title', 'content'), field_args={
+   BookForm = model_form(Book, only=['title', 'content'], field_args={
        'title': {
            'label': 'Your new label',
        },
