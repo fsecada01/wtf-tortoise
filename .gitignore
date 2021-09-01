@@ -2,5 +2,6 @@ __pycache__
 *.pyc
 .vscode
 .env
+.venv
 test_db.sqlite3
 example_db.sqlite3

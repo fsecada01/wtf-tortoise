@@ -1,0 +1,8 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+wtftortoise/wtf_tortoise.egg-info/PKG-INFO
+wtftortoise/wtf_tortoise.egg-info/SOURCES.txt
+wtftortoise/wtf_tortoise.egg-info/dependency_links.txt
+wtftortoise/wtf_tortoise.egg-info/top_level.txt

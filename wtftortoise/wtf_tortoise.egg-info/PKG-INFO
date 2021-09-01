@@ -1,3 +1,19 @@
+Metadata-Version: 2.1
+Name: wtf-tortoise
+Version: 0.0.1
+Summary: Implementation of WTForms for Tortoise ORM
+Home-page: https://github.com/fsecada01/wtf-tortoise
+Author: sinisaos (packaged by fsecada01
+Author-email: francis.secada@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # WTF Tortoise
 
 Form generation utilities for Tortoise ORM Model class.
@@ -113,3 +129,4 @@ Example template for above view using Jinja and Bootstrap:
 </main>
 {% endblock %}
 ```
+

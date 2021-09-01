@@ -1,0 +1,8 @@
+[build-system]
+requires = [
+    'setuptools',
+    'wheel',
+    'tortoise-orm'
+]
+
+build-backend = 'setuptools.build_meta'

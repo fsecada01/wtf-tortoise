@@ -1,0 +1,24 @@
+import setuptools
+
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name="wtf-tortoise",
+    version="0.0.1",
+    author="sinisaos (packaged by fsecada01",
+    author_email="francis.secada@gmail.com",
+    description="Implementation of WTForms for Tortoise ORM",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/fsecada01/wtf-tortoise",
+    project_url=None,
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    package_dir={"": "wtftortoise"},
+    packages=setuptools.find_packages(where=""),
+    python_requires=">=3.7",
+)
