@@ -3,7 +3,7 @@ import asyncio
 from tortoise import Tortoise, fields, run_async
 from tortoise.models import Model
 from wtforms import fields as f
-from orm import model_form
+from wtftortoise.orm import model_form
 
 
 class Book(Model):
