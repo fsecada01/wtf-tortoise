@@ -5,7 +5,7 @@ Based on the code found in wtforms.ext and provides a bridge between Tortoise OR
 
 Packaged from [Sinisaos](https://github.com/sinisaos/wtf-tortoise), who did all the work. Please support his efforts.
 
-For testing/direct usage, just download repo, unzip and put in root of your project.  Otherwise, just run: `pip install wtftoroise`.
+For testing/direct usage, just download repo, unzip and put in root of your project.  Otherwise, just run: `pip install wtf-toroise`.
 
 Now you can import wtftortoise.orm like in edit example below.
 
@@ -64,7 +64,7 @@ Example implementation for an edit view using Starlette:
 
 ```shell
 # other imports
-from wtftortoise.orm import model_form
+from src.orm import model_form
 
 @app.route("/{id:int}/edit", methods=["GET", "POST"])
 async def edit(request):
