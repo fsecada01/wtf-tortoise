@@ -64,7 +64,7 @@ Example implementation for an edit view using Starlette:
 
 ```shell
 # other imports
-from src.orm import model_form
+from wtftortoise.orm import model_form
 
 @app.route("/{id:int}/edit", methods=["GET", "POST"])
 async def edit(request):

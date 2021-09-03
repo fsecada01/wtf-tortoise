@@ -1,3 +1,4 @@
 tortoise-orm
 uvicorn
 wtforms
+wtforms[email]

@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="wtf-tortoise",
-    version="0.0.3",
+    version="0.0.4",
     author="sinisaos (packaged by fsecada01",
     author_email="francis.secada@gmail.com",
     description="Implementation of WTForms for Tortoise ORM",
@@ -22,5 +22,6 @@ setuptools.setup(
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
+    install_requires=["tortoise-orm", "uvicorn", "wtforms", "wtforms[email]"],
     python_requires=">=3.7",
 )
