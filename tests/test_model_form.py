@@ -25,14 +25,18 @@ class WTFTortoiseTestCase(unittest.TestCase):
         BookForm = model_form(Book)
         form = BookForm()
         self.assertEqual(list(form._fields.keys()), ["id", "title", "content"])
-        self.assertEqual(form.data, {"id": None, "title": None, "content": None})
+        self.assertEqual(
+            form.data, {"id": None, "title": None, "content": None}
+        )
 
     def test_exclude(self):
         BookForm = model_form(Book, exclude=["id", "content"])
 
         form = BookForm()
         self.assertEqual(list(form._fields.keys()), ["title"])
-        self.assertNotEqual(list(form._fields.keys()), ["id", "title", "content"])
+        self.assertNotEqual(
+            list(form._fields.keys()), ["id", "title", "content"]
+        )
         self.assertEqual(form.data, {"title": None})
 
     def test_only(self):
@@ -40,7 +44,9 @@ class WTFTortoiseTestCase(unittest.TestCase):
 
         form = BookForm()
         self.assertEqual(list(form._fields.keys()), ["title", "content"])
-        self.assertNotEqual(list(form._fields.keys()), ["id", "title", "content"])
+        self.assertNotEqual(
+            list(form._fields.keys()), ["id", "title", "content"]
+        )
         self.assertEqual(form.data, {"title": None, "content": None})
 
     def test_new_label_field_args(self):
@@ -67,7 +73,9 @@ class WTFTortoiseTestCase(unittest.TestCase):
         BookForm = model_form(Book)
 
         form = BookForm()
-        self.assertEqual(form.data, {"id": None, "title": None, "content": None})
+        self.assertEqual(
+            form.data, {"id": None, "title": None, "content": None}
+        )
         self.assertFalse(form.validate())
 
     def test_book_form_input(self):

@@ -22,8 +22,12 @@ async def list_all(request):
     menu = Tortoise.apps.get("models")
     model_describe = Tortoise.describe_model(Book)
     fk_fields = [m["name"] for m in model_describe.get("fk_fields")]
-    backward_fk_fields = [m["name"] for m in model_describe.get("backward_fk_fields")]
-    field_name_list = [i for i in Book._meta.fields_map if i not in backward_fk_fields]
+    backward_fk_fields = [
+        m["name"] for m in model_describe.get("backward_fk_fields")
+    ]
+    field_name_list = [
+        i for i in Book._meta.fields_map if i not in backward_fk_fields
+    ]
     if fk_fields:
         results = await Book.all().prefetch_related(*fk_fields)
     else:
@@ -80,7 +84,9 @@ async def delete(request):
 routes = [
     Route("/", endpoint=list_all, methods=["GET"], name="list_all"),
     Route("/create", endpoint=create, methods=["GET", "POST"], name="create"),
-    Route("/{id:int}/edit", endpoint=edit, methods=["GET", "POST"], name="edit"),
+    Route(
+        "/{id:int}/edit", endpoint=edit, methods=["GET", "POST"], name="edit"
+    ),
     Route("/{id:int}/delete", endpoint=delete, methods=["GET"], name="delete"),
 ]
 
