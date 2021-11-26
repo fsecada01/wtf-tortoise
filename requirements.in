@@ -1,3 +1,6 @@
+black
+coverage
+isort
 tortoise-orm
 uvicorn
 wtforms

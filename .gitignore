@@ -1,3 +1,9 @@
+# Test and example db
+test_db.sqlite3
+example_db.sqlite3
+example_db.sqlite3-wal
+example_db.sqlite3-shm
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
