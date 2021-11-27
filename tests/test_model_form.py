@@ -1,7 +1,6 @@
-import asyncio
 import unittest
 
-from tortoise import Tortoise, fields
+from tortoise import fields
 from tortoise.models import Model
 from wtforms import fields as f
 
