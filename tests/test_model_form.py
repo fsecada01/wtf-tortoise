@@ -1,3 +1,4 @@
+import datetime
 import unittest
 
 from tortoise import fields
@@ -11,6 +12,9 @@ class Book(Model):
     id = fields.IntField(pk=True)
     title = fields.CharField(max_length=255)
     content = fields.TextField()
+    created = fields.DatetimeField(auto_now_add=True)
+    released = fields.BooleanField()
+    price = fields.FloatField()
 
 
 class WTFTortoiseTestCase(unittest.TestCase):
@@ -23,20 +27,57 @@ class WTFTortoiseTestCase(unittest.TestCase):
     def test_book_form(self):
         BookForm = model_form(Book)
         form = BookForm()
-        self.assertEqual(list(form._fields.keys()), ["id", "title", "content"])
         self.assertEqual(
-            form.data, {"id": None, "title": None, "content": None}
+            list(form._fields.keys()),
+            [
+                "id",
+                "title",
+                "content",
+                "created",
+                "released",
+                "price",
+            ],
+        )
+        self.assertEqual(
+            form.data,
+            {
+                "id": None,
+                "title": None,
+                "content": None,
+                "created": None,
+                "released": False,
+                "price": None,
+            },
         )
 
     def test_exclude(self):
         BookForm = model_form(Book, exclude=["id", "content"])
 
         form = BookForm()
-        self.assertEqual(list(form._fields.keys()), ["title"])
-        self.assertNotEqual(
-            list(form._fields.keys()), ["id", "title", "content"]
+        self.assertEqual(
+            list(form._fields.keys()),
+            [
+                "title",
+                "created",
+                "released",
+                "price",
+            ],
         )
-        self.assertEqual(form.data, {"title": None})
+        self.assertNotEqual(
+            list(form._fields.keys()),
+            [
+                "id",
+                "title",
+                "content",
+                "created",
+                "released",
+                "price",
+            ],
+        )
+        self.assertEqual(
+            form.data,
+            {"title": None, "created": None, "released": False, "price": None},
+        )
 
     def test_only(self):
         BookForm = model_form(Book, only=["title", "content"])
@@ -44,7 +85,15 @@ class WTFTortoiseTestCase(unittest.TestCase):
         form = BookForm()
         self.assertEqual(list(form._fields.keys()), ["title", "content"])
         self.assertNotEqual(
-            list(form._fields.keys()), ["id", "title", "content"]
+            list(form._fields.keys()),
+            [
+                "id",
+                "title",
+                "content",
+                "created",
+                "released",
+                "price",
+            ],
         )
         self.assertEqual(form.data, {"title": None, "content": None})
 
@@ -67,24 +116,41 @@ class WTFTortoiseTestCase(unittest.TestCase):
         self.assertTrue(isinstance(form.id, f.IntegerField))
         self.assertTrue(isinstance(form.title, f.StringField))
         self.assertTrue(isinstance(form.content, f.TextAreaField))
+        self.assertTrue(isinstance(form.created, f.DateTimeField))
+        self.assertTrue(isinstance(form.price, f.FloatField))
 
     def test_validators(self):
         BookForm = model_form(Book)
 
         form = BookForm()
         self.assertEqual(
-            form.data, {"id": None, "title": None, "content": None}
+            form.data,
+            {
+                "id": None,
+                "title": None,
+                "content": None,
+                "created": None,
+                "released": False,
+                "price": None,
+            },
         )
         self.assertFalse(form.validate())
 
     def test_book_form_input(self):
-        BookForm = model_form(Book, exclude=["id"])
-        form = BookForm(title="Book1", content="Content1")
+        BookForm = model_form(Book, exclude=["id", "created"])
+        form = BookForm(
+            title="Book1",
+            content="Content1",
+            released=True,
+            price=10.5,
+        )
         self.assertEqual(
             form.data,
             {
                 "title": "Book1",
                 "content": "Content1",
+                "released": True,
+                "price": 10.5,
             },
         )
         self.assertTrue(form.validate())

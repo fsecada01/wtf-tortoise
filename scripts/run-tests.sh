@@ -1,3 +1,3 @@
 #!/bin/bash
 
-coverage run --source wtftortoise.orm -m unittest discover tests && coverage html 
+python -m pytest --cov=wtftortoise.orm --cov-report xml --cov-report html --cov-fail-under 90 -s $@
