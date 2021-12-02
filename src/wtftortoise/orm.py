@@ -54,29 +54,30 @@ The form can be generated setting field arguments:
        }
    })
 """
-from wtforms import Form, validators, fields as f
+from wtforms import Form
+from wtforms import fields as f
+from wtforms import validators
 from wtforms.validators import DataRequired
-from wtforms.fields import html5
 
 
 def convert_IntField(model, prop, kwargs):
     """Returns a form field for a IntField."""
-    return html5.IntegerField()
+    return f.IntegerField()
 
 
 def convert_SmallIntField(model, prop, kwargs):
     """Returns a form field for a SmallIntField."""
-    return html5.IntegerField()
+    return f.IntegerField()
 
 
 def convert_BigIntField(model, prop, kwargs):
     """Returns a form field for a BigIntField."""
-    return html5.IntegerField()
+    return f.IntegerField()
 
 
 def convert_CharField(model, prop, kwargs):
     """Returns a form field for a CharField."""
-    kwargs['validators'].append(validators.length(max=255))
+    kwargs["validators"].append(validators.length(max=255))
     return f.StringField(**kwargs)
 
 
@@ -87,7 +88,7 @@ def convert_TextField(model, prop, kwargs):
 
 def convert_UUIDField(model, prop, kwargs):
     """Returns a form field for a CharField."""
-    kwargs['validators'].append(validators.length(max=36))
+    kwargs["validators"].append(validators.length(max=36))
     return f.StringField(**kwargs)
 
 
@@ -123,16 +124,16 @@ class ModelConverter:
     """
 
     default_converters = {
-        'CharField': convert_CharField,
-        'TextField': convert_TextField,
-        'UUIDField': convert_UUIDField,
-        'BooleanField': convert_BooleanField,
-        'IntField': convert_IntField,
-        'SmallIntField': convert_IntField,
-        'BigIntField': convert_IntField,
-        'FloatField': convert_FloatField,
-        'DatetimeField': convert_DateTimeField,
-        'DateField': convert_DateField,
+        "CharField": convert_CharField,
+        "TextField": convert_TextField,
+        "UUIDField": convert_UUIDField,
+        "BooleanField": convert_BooleanField,
+        "IntField": convert_IntField,
+        "SmallIntField": convert_IntField,
+        "BigIntField": convert_IntField,
+        "FloatField": convert_FloatField,
+        "DatetimeField": convert_DateTimeField,
+        "DateField": convert_DateField,
     }
 
     def __init__(self, converters=None):
@@ -158,23 +159,24 @@ class ModelConverter:
         """
         prop_type_name = type(prop).__name__
         kwargs = {
-            'label': prop.model_field_name.title(),
-            'default': prop.default,
-            'validators': [],
+            "label": prop.model_field_name.title(),
+            "default": prop.default,
+            "validators": [],
         }
         if field_args:
             kwargs.update(field_args)
 
         if prop.required:
-            kwargs['validators'].append(DataRequired())
+            kwargs["validators"].append(DataRequired())
 
         converter = self.converters.get(prop_type_name, None)
         if converter is not None:
             return converter(model, prop, kwargs)
 
 
-def model_fields(model, only=None, exclude=None, field_args=None,
-                 converter=None):
+def model_fields(
+    model, only=None, exclude=None, field_args=None, converter=None
+):
     """
     Extracts and returns a dictionary of form fields for a given
     Model class.
@@ -217,8 +219,14 @@ def model_fields(model, only=None, exclude=None, field_args=None,
     return field_dict
 
 
-def model_form(model, base_class=Form, only=None, exclude=None,
-               field_args=None, converter=None):
+def model_form(
+    model,
+    base_class=Form,
+    only=None,
+    exclude=None,
+    field_args=None,
+    converter=None,
+):
     """
     Creates and returns a dynamic ``wtforms.Form`` class for a given
     Model class. The form class can be used as it is or serve as a base
@@ -247,4 +255,4 @@ def model_form(model, base_class=Form, only=None, exclude=None,
 
     # Return a dynamically created form class, extending from base_class and
     # including the created fields as properties.
-    return type(model.__name__ + 'Form', (base_class,), field_dict)
+    return type(model.__name__ + "Form", (base_class,), field_dict)

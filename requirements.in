@@ -1,3 +1,7 @@
+black
+coverage
+flake8
+isort
 tortoise-orm
 uvicorn
 wtforms
